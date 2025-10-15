@@ -1,0 +1,5 @@
+Main : start the gamme
+TicTacToe: logique princiapale du jeu
+Player: le joueur symbolisé par X ou O
+Cell: case du plateau qui peut etre vide ou occupée
+
