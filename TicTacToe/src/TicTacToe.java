@@ -3,11 +3,13 @@ import java.util.Scanner;
 public class TicTacToe {
     private Cell[][] board; // ma grille
     private int size; // stocker ou si besoin de modifier
-    private Player player;
+    private Player player1;
+    private Player player2;
 
     public TicTacToe(int size) { // contructeur
         this.size = size;
-        this.player = new Player("campus");
+        this.player1 = new Player("campus");
+        this.player2 = new Player("computer");
 // instantialisation de chaque case et parcourrir mes cellules
         board = new Cell[size][size];
         for (int i = 0; i < size; i++) {
@@ -75,10 +77,24 @@ public class TicTacToe {
     }
 // afficher le plteau initial
     public void play() {
-        display();
-        int[] move = getMoveFromPlayer();
-        setOwner(move[0], move[1], player);
-        System.out.println("\n mon plateau après l coup :\n");
-        display();
-    }
+        Player currentPlayer = player1;
+        int movesPlayed = 0;
+        while (movesPlayed < 9) {
+            display();
+            System.out.print(" c'est ton tour " + currentPlayer.getRepresentation() + " : ");
+            int[] move = getMoveFromPlayer();
+            setOwner(move[0], move[1], currentPlayer    );
+            if (currentPlayer == player1) {
+                currentPlayer = player2;
+            } else {
+                currentPlayer = player1;
+            }
+            display();
+            System.out.println("\n end :\n");
+
+        }
+        }
+public boolean isOver () {
+
+}
 }
