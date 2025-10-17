@@ -1,16 +1,15 @@
 public class Cell {
     private Player owner;
 
-    public String getRepresentation() {
-        return owner == null ? "   " : " " + owner.getRepresentation() + " ";
+    public boolean isEmpty() {
+        return owner == null;
     }
 
     public void setOwner(Player player) {
         this.owner = player;
     }
 
-    public boolean isEmpty() {
-        return owner == null;
+    public char getSymbol() {
+        return (owner == null) ? ' ' : owner.getSymbol();
     }
 }
-

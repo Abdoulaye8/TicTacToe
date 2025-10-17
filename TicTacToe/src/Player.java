@@ -1,11 +1,11 @@
 public class Player {
-    private String representation;
+    private char symbol;
 
-    public Player(String representation) {
-        this.representation = representation;
+    public Player(char symbol) {
+        this.symbol = symbol;
     }
 
-    public String getRepresentation() {
-        return representation;
+    public char getSymbol() {
+        return symbol;
     }
 }

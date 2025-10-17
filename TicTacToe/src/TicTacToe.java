@@ -1,100 +1,65 @@
 import java.util.Scanner;
-// class principale qui gère le jeux
+// créer le plateau et les 2 joueurs ainsi que affichage,les coups et changement de joueur
 public class TicTacToe {
-    private Cell[][] board; // ma grille
-    private int size; // stocker ou si besoin de modifier
+    private Cell[][] board;
     private Player player1;
     private Player player2;
+    private int size = 3;
 
-    public TicTacToe(int size) { // contructeur
-        this.size = size;
-        this.player1 = new Player("campus");
-        this.player2 = new Player("computer");
-// instantialisation de chaque case et parcourrir mes cellules
+    public TicTacToe() {
         board = new Cell[size][size];
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 board[i][j] = new Cell();
             }
         }
+        player1 = new Player('X');
+        player2 = new Player('O');
     }
 
-    // affichage du pltau ensuite parcourrir ligne et colonne
-    public void display() {
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
-                System.out.print(board[i][j].getRepresentation());
-                if (j < size - 1) {
-                    System.out.print("|");
-                }
-            }
-            System.out.println();
-            if (i < size - 1) {
-                System.out.println("---+---+---");
-            }
-        }
-    }
-// demader la saisie du player
-    public int[] getMoveFromPlayer() {
+    public void play() {
         Scanner scanner = new Scanner(System.in);
-        int row, col;
+        Player currentPlayer = player1;
+        int moves = 0;
 
-        while (true) {
-            System.out.print("Entrez la ligne (0-2) : ");
-            if (!scanner.hasNextInt()) {
-                System.out.println(" Entrez un nombre !");
-                scanner.next();
-                continue;
-            }
-            row = scanner.nextInt();
-
-            System.out.print("Entrez la colonne (0-2) : ");
-            if (!scanner.hasNextInt()) {
-                System.out.println(" Entrez un nombre !");
-                scanner.next();
-                continue;
-            }
-            col = scanner.nextInt();
+        while (!isGameOver(moves)) {
+            printBoard();
+            System.out.println("Joueur " + currentPlayer.getSymbol() + ", entrez ligne et colonne (0-2) : ");
+            int row = scanner.nextInt();
+            int col = scanner.nextInt();
 
             if (row < 0 || row >= size || col < 0 || col >= size) {
-                System.out.println("Coordonnées hors du plateau !");
+                System.out.println("Position invalide.");
                 continue;
             }
 
             if (!board[row][col].isEmpty()) {
-                System.out.println("Cette case est déjà occupée !");
+                System.out.println("Case occupée.");
                 continue;
             }
 
-            break;
+            board[row][col].setOwner(currentPlayer);
+            moves++;
+
+            // Changement de joueur
+            currentPlayer = (currentPlayer == player1) ? player2 : player1;
         }
 
-        return new int[]{row, col};
+        printBoard();
+        System.out.println("Partie terminée !");
     }
-    // affecte campus à cellule choisie
-    public void setOwner(int row, int col, Player player) {
-        board[row][col].setOwner(player);
+    private boolean isGameOver(int moves) {
+        return moves == 9;
     }
-// afficher le plteau initial
-    public void play() {
-        Player currentPlayer = player1;
-        int movesPlayed = 0;
-        while (movesPlayed < 9) {
-            display();
-            System.out.print(" c'est ton tour " + currentPlayer.getRepresentation() + " : ");
-            int[] move = getMoveFromPlayer();
-            setOwner(move[0], move[1], currentPlayer    );
-            if (currentPlayer == player1) {
-                currentPlayer = player2;
-            } else {
-                currentPlayer = player1;
+
+    public void printBoard() {
+        System.out.println("-------------");
+        for (int i = 0; i < size; i++) {
+            System.out.print("|");
+            for (int j = 0; j < size; j++) {
+                System.out.print(" " + board[i][j].getSymbol() + " |");
             }
-            display();
-            System.out.println("\n end :\n");
-
+            System.out.println("\n-------------");
         }
-        }
-public boolean isOver () {
-
-}
+    }
 }
