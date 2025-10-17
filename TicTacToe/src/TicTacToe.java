@@ -1,5 +1,5 @@
 import java.util.Scanner;
-// créer le plateau et les 2 joueurs ainsi que affichage,les coups et changement de joueur
+
 public class TicTacToe {
     private Cell[][] board;
     private Player player1;
@@ -22,7 +22,7 @@ public class TicTacToe {
         Player currentPlayer = player1;
         int moves = 0;
 
-        while (!isGameOver(moves)) {
+        while (!isOver(moves)) {
             printBoard();
             System.out.println("Joueur " + currentPlayer.getSymbol() + ", entrez ligne et colonne (0-2) : ");
             int row = scanner.nextInt();
@@ -41,15 +41,57 @@ public class TicTacToe {
             board[row][col].setOwner(currentPlayer);
             moves++;
 
-            // Changement de joueur
+            if (hasWinner()) {
+                printBoard();
+                System.out.println("Joueur " + currentPlayer.getSymbol() + " a gagné !");
+                return;
+            }
+
             currentPlayer = (currentPlayer == player1) ? player2 : player1;
         }
 
         printBoard();
-        System.out.println("Partie terminée !");
+        System.out.println("Match nul ! Les 9 cases sont remplies.");
     }
-    private boolean isGameOver(int moves) {
-        return moves == 9;
+
+    public boolean isOver(int moves) {
+        return hasWinner() || moves >= size * size;
+    }
+
+    private boolean hasWinner() {
+        // Vérifie lignes
+        for (int i = 0; i < size; i++) {
+            if (!board[i][0].isEmpty() &&
+                    board[i][0].getSymbol() == board[i][1].getSymbol() &&
+                    board[i][1].getSymbol() == board[i][2].getSymbol()) {
+                return true;
+            }
+        }
+
+        // Vérifie colonnes
+        for (int j = 0; j < size; j++) {
+            if (!board[0][j].isEmpty() &&
+                    board[0][j].getSymbol() == board[1][j].getSymbol() &&
+                    board[1][j].getSymbol() == board[2][j].getSymbol()) {
+                return true;
+            }
+        }
+
+        // Diagonale 1
+        if (!board[0][0].isEmpty() &&
+                board[0][0].getSymbol() == board[1][1].getSymbol() &&
+                board[1][1].getSymbol() == board[2][2].getSymbol()) {
+            return true;
+        }
+
+        // Diagonale 2
+        if (!board[0][2].isEmpty() &&
+                board[0][2].getSymbol() == board[1][1].getSymbol() &&
+                board[1][1].getSymbol() == board[2][0].getSymbol()) {
+            return true;
+        }
+
+        return false;
     }
 
     public void printBoard() {
