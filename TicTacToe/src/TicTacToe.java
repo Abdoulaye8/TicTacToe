@@ -88,7 +88,6 @@ public class TicTacToe {
         return false;
     }
 
-    //  IA and View
     public int getSize() { return size; }
     public boolean isCellEmpty(int row, int col) { return board[row][col].isEmpty(); }
     public char getCellSymbol(int row, int col) { return board[row][col].getSymbol(); }

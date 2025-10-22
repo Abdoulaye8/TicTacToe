@@ -8,7 +8,7 @@ public class InteractionUtilisateur {
     public int[] getMove(@org.jetbrains.annotations.NotNull TicTacToe game, Player player) {
         int row, col;
         while (true) {
-            System.out.println("Joueur " + player.getSymbol() + ", entrez ligne et colonne (0-" + (game.getSize()-1) + ") : ");
+            System.out.println("Joueur " + player.getSymbol() + ", entrez ligne et colonn (0-" + (game.getSize()) + ") : ");
             try {
                 row = Integer.parseInt(scanner.next());
                 col = Integer.parseInt(scanner.next());
@@ -24,11 +24,9 @@ public class InteractionUtilisateur {
                 }
 
                 return new int[]{row, col};
-            } catch (NumberFormatException e) {
-                System.out.println("Veuillez entrer des nombres valides.");
+            } catch (NumberFormatException) {
             }
         }
     }
 
-    public void close() { scanner.close(); }
 }
