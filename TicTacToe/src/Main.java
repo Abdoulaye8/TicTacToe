@@ -1,3 +1,9 @@
+import game.TicTacToe;
+import players.ArtificialPlayer;
+import players.Player;
+import view.InteractionUtilisateur;
+import view.View;
+
 public class Main {
     public static void main(String[] args) {
         InteractionUtilisateur ui = new InteractionUtilisateur();

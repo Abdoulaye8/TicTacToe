@@ -1,3 +1,10 @@
+package game;
+
+import players.ArtificialPlayer;
+import players.Player;
+import view.InteractionUtilisateur;
+import view.View;
+
 public class TicTacToe {
     private Cell[][] board;
     private Player player1;

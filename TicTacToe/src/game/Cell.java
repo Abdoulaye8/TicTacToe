@@ -1,3 +1,7 @@
+package game;
+
+import players.Player;
+
 public class Cell {
     private Player owner;
 

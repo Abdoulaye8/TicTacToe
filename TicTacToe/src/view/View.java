@@ -1,3 +1,7 @@
+package view;
+
+import game.TicTacToe;
+
 public class View {
     public void printBoard(TicTacToe game) {
         System.out.println("\n    0   1   2 ");

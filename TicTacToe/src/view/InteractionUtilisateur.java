@@ -1,3 +1,8 @@
+package view;
+
+import game.TicTacToe;
+import players.Player;
+
 import java.util.Scanner;
 
 public class InteractionUtilisateur {
@@ -24,9 +29,11 @@ public class InteractionUtilisateur {
                 }
 
                 return new int[]{row, col};
-            } catch (NumberFormatException) {
+            } catch (NumberFormatException e) {
+                System.out.println("Veuillez entrer des nombres valides.");
             }
         }
     }
 
+    public void close() { scanner.close(); }
 }

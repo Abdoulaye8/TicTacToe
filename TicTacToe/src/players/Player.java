@@ -1,3 +1,5 @@
+package players;
+
 public class Player {
     private char symbol;
 
