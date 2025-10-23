@@ -1,20 +1,24 @@
-import game.TicTacToe;
+import games.BoardGame;
+import games.TicTacToe;
 import players.ArtificialPlayer;
 import players.Player;
 import view.InteractionUtilisateur;
 import view.View;
 
 public class Main {
+
     public static void main(String[] args) {
-        InteractionUtilisateur ui = new InteractionUtilisateur();
+
         View view = new View();
+        InteractionUtilisateur interaction = new InteractionUtilisateur();
 
         Player player1 = new Player('X');
         Player player2 = new ArtificialPlayer('O');
 
-        TicTacToe game = new TicTacToe(player1, player2, ui, view);
+        BoardGame game = new TicTacToe(3, 3, player1, player2, view, interaction);
+
         game.play();
 
-        ui.close();
+        view.showMessage("Partie terminée !");
     }
 }
