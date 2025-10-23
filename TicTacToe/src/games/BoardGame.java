@@ -36,10 +36,14 @@ public abstract class BoardGame {
         movesCount = 0;
     }
 
-    protected Player getCurrentPlayer() { return players[currentPlayerIndex]; }
-    protected void switchPlayer() { currentPlayerIndex = (currentPlayerIndex + 1) % players.length; }
-    public boolean isCellEmpty(int row, int col) { return board[row][col].isEmpty(); }
-    protected Cell getCell(int row, int col) { return board[row][col]; }
+    protected Player getCurrentPlayer() {
+        return players[currentPlayerIndex]; }
+    protected void switchPlayer() {
+        currentPlayerIndex = (currentPlayerIndex + 1) % players.length; }
+    public boolean isCellEmpty(int row, int col) {
+        return board[row][col].isEmpty(); }
+    protected Cell getCell(int row, int col) {
+        return board[row][col]; }
     protected void incrementMoveCount() { movesCount++; }
     protected int getMovesCount() { return movesCount; }
 
