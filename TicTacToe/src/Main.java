@@ -1,4 +1,5 @@
 import games.BoardGame;
+import games.Gomoku;
 import games.TicTacToe;
 import players.ArtificialPlayer;
 import players.Player;
@@ -16,7 +17,6 @@ public class Main {
         Player player2 = new ArtificialPlayer('O');
 
         BoardGame game = new TicTacToe(3, 3, player1, player2, view, interaction);
-
         game.play();
 
         view.showMessage("Partie terminée !");
