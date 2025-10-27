@@ -14,11 +14,14 @@ public class TicTacToe extends BoardGame {
 
     @Override
     public void play() {
+        Player winner = null;
+
         while (!isOver()) {
             Player currentPlayer = getCurrentPlayer();
             int[] move;
 
             if (currentPlayer instanceof ArtificialPlayer) {
+                System.out.println("tour de l'ArtificialPlayer");
                 move = ((ArtificialPlayer) currentPlayer).makeMove(this);
             } else {
                 move = interaction.demanderCoup(currentPlayer);
@@ -30,14 +33,18 @@ public class TicTacToe extends BoardGame {
             if (isCellEmpty(row, col)) {
                 applyMove(move);
                 view.printBoard(board);
-                switchPlayer();
+                if (hasWinner()) {
+                    winner = currentPlayer;
+                    break;
+                } else {
+                    switchPlayer();
+                }
             } else {
-                interaction.showMessage("Case déjà occupée, essayez un autre coup !");
+                view.showMessage("Case déjà occupée, essayez un autre coup !");
             }
         }
 
-        if (hasWinner()) {
-            Player winner = players[(currentPlayerIndex + players.length - 1) % players.length];
+        if (winner != null) {
             view.showMessage("Victoire du joueur " + winner.getSymbol() + " !");
         } else {
             view.showMessage("Match nul !");
@@ -48,8 +55,12 @@ public class TicTacToe extends BoardGame {
     protected void applyMove(int[] move) {
         int row = move[0];
         int col = move[1];
-        getCell(row, col).setOwner(getCurrentPlayer());
-        incrementMoveCount();
+        if (isCellEmpty(row, col)) {
+            getCell(row, col).setOwner(getCurrentPlayer());
+            incrementMoveCount();
+        } else {
+            view.showMessage("Case déjà occupée !");
+        }
     }
 
     @Override
@@ -57,26 +68,38 @@ public class TicTacToe extends BoardGame {
         for (int i = 0; i < rows; i++) {
             if (!isCellEmpty(i, 0) &&
                     board[i][0].getSymbol() == board[i][1].getSymbol() &&
-                    board[i][1].getSymbol() == board[i][2].getSymbol()) return true;
+                    board[i][1].getSymbol() == board[i][2].getSymbol()) {
+                return true;
+            }
         }
         for (int j = 0; j < cols; j++) {
             if (!isCellEmpty(0, j) &&
                     board[0][j].getSymbol() == board[1][j].getSymbol() &&
-                    board[1][j].getSymbol() == board[2][j].getSymbol()) return true;
+                    board[1][j].getSymbol() == board[2][j].getSymbol()) {
+                return true;
+            }
         }
         if (!isCellEmpty(0,0) &&
                 board[0][0].getSymbol() == board[1][1].getSymbol() &&
-                board[1][1].getSymbol() == board[2][2].getSymbol()) return true;
-
+                board[1][1].getSymbol() == board[2][2].getSymbol()) {
+            return true;
+        }
         if (!isCellEmpty(0,2) &&
                 board[0][2].getSymbol() == board[1][1].getSymbol() &&
-                board[1][1].getSymbol() == board[2][0].getSymbol()) return true;
-
+                board[1][1].getSymbol() == board[2][0].getSymbol()) {
+            return true;
+        }
         return false;
     }
 
     @Override
     protected boolean isOver() {
-        return hasWinner() || getMovesCount() == rows * cols;
+        if (hasWinner()) {
+            return true;
+        } else if (getMovesCount() >= rows * cols) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

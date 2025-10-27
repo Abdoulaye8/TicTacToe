@@ -65,20 +65,20 @@ public class Puissance4 extends BoardGame {
         return checkLigne(symbol, ALIGN_TO_WIN);
     }
 
-    private boolean checkLigne(char symbol, int toAlign) {
-        for (int i = 0; i < toAlign; i++) {
-            for (int j = 0; j < toAlign; j++) {
+    private boolean checkLigne(char symbol, int ALIGN_TO_WIN) {
+        for (int i = 0; i < ALIGN_TO_WIN; i++) {
+            for (int j = 0; j < ALIGN_TO_WIN; j++) {
                 if (board[i][j].getSymbol() == symbol) {
-                    if (checkCell(i, j, 1, 0, symbol, toAlign)) {
+                    if (checkCell(i, j, 1, 0, symbol, ALIGN_TO_WIN)) {
                         System.out.println("align trouvé");
                         return true;
-                    } else if (checkCell(i, j, 0, 1, symbol, toAlign)) {
+                    } else if (checkCell(i, j, 0, 1, symbol, ALIGN_TO_WIN)) {
                         System.out.println("align horizontl trouvé");
                         return true;
-                    } else if (checkCell(i, j, 1, 1, symbol, toAlign)) {
+                    } else if (checkCell(i, j, 1, 1, symbol, ALIGN_TO_WIN)) {
                         System.out.println("align diagonal trouvé");
                         return true;
-                    } else if (checkCell(i, j, 1, -1, symbol, toAlign)) {
+                    } else if (checkCell(i, j, 1, -1, symbol, ALIGN_TO_WIN)) {
                         System.out.println("alignement diagonal trouvé");
                         return true;
                     }
@@ -108,11 +108,12 @@ public class Puissance4 extends BoardGame {
     protected boolean isOver() {
         if (hasWinner()) {
             return true;
-        } else if (getMovesCount() >= rows * cols) {
-            return true;
-        } else {
-            return false;
         }
+        if (getMovesCount() >= rows * cols) {
+            return true;
+        }
+        return false;
+
 
     }
 }
