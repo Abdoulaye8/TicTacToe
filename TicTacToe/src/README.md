@@ -61,3 +61,6 @@ direction LR
 
 
 ```
+```mermaid
+package gam
+```

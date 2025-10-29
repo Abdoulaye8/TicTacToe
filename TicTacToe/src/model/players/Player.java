@@ -1,4 +1,4 @@
-package players;
+package model.players;
 
 public class Player {
     private char symbol;

@@ -1,6 +1,6 @@
-package games;
+package model.games;
 
-import players.Player;
+import model.players.Player;
 
 public class Cell {
     private Player owner;

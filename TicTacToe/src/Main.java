@@ -1,9 +1,6 @@
-import games.BoardGame;
-import games.Gomoku;
-import games.Puissance4;
-import games.TicTacToe;
-import players.ArtificialPlayer;
-import players.Player;
+import controller.BoardGame;
+import model.players.ArtificialPlayer;
+import model.players.Player;
 import view.InteractionUtilisateur;
 import view.View;
 import java.util.Scanner;
@@ -30,13 +27,13 @@ public class Main {
 
         switch (choice) {
             case 1:
-                game = new TicTacToe(3, 3, player1, player2, view, interaction);
+                game = new BoardGame.TicTacToe(3, 3, player1, player2, view, interaction);
                 break;
             case 2:
-                game = new Gomoku(player1, player2, view, interaction);
+                game = new BoardGame.Gomoku(player1, player2, view, interaction);
                 break;
             case 3:
-                game = new Puissance4(player1, player2, view, interaction);
+                game = new BoardGame.Puissance4(player1, player2, view, interaction);
                 break;
             default:
                 System.out.println("Choix invalide !");

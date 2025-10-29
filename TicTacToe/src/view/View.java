@@ -1,6 +1,6 @@
 package view;
 
-import games.Cell;
+import model.games.Cell;
 
 public class View {
 

@@ -1,6 +1,6 @@
-package players;
+package model.players;
 
-import games.TicTacToe;
+import controller.BoardGame;
 
 import java.util.Random;
 
@@ -12,7 +12,7 @@ public class ArtificialPlayer extends Player {
         random = new Random();
     }
 
-    public int[] makeMove(TicTacToe game) {
+    public int[] makeMove(BoardGame.TicTacToe game) {
         int row, col;
         do {
             row = random.nextInt(game.getRows());
